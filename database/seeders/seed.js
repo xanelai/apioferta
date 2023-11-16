@@ -4,7 +4,9 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-
+    
+    // await queryInterface.sequelize.query('SET IDENTITY_INSERT countries ON')
+    await queryInterface.sequelize.query('DBCC CHECKIDENT(\'countries\', RESEED, 1001)')
     await queryInterface.bulkInsert('countries', [
       {
         name: 'Chile',
@@ -18,7 +20,7 @@ module.exports = {
         created_at: new Date(),
         updated_at: new Date()
       },
-      {
+      { 
         name: 'Argentina',
         region: 'Suramerica',
         created_at: new Date(),
@@ -27,6 +29,8 @@ module.exports = {
 
     ], {})
 
+
+    await queryInterface.sequelize.query('DBCC CHECKIDENT(\'states\', RESEED, 1001)')
     await queryInterface.bulkInsert('states', [
       {
         name: 'Maule',
@@ -40,6 +44,7 @@ module.exports = {
       }
     ], {})
 
+    await queryInterface.sequelize.query('DBCC CHECKIDENT(\'cities\', RESEED, 1001)')
     await queryInterface.bulkInsert('cities',[
       {
         name: 'Talca',
@@ -55,6 +60,7 @@ module.exports = {
       }
     ], {})
 
+    await queryInterface.sequelize.query('DBCC CHECKIDENT(\'categories\', RESEED, 1001)')
     await queryInterface.bulkInsert('categories', [
       {
         name: 'Tecnología',
@@ -69,7 +75,7 @@ module.exports = {
     ], {})
 
 
-
+    await queryInterface.sequelize.query('DBCC CHECKIDENT(\'profiles\', RESEED, 1001)')
     await queryInterface.bulkInsert('profiles', [
       {
         name: 'Administrador', //1001
@@ -81,7 +87,7 @@ module.exports = {
         created_at: new Date(), 
         updated_at: new Date()
       },
-      {
+      { 
         name: 'Ofertante',
         created_at: new Date(), //1003
         updated_at: new Date()
@@ -92,6 +98,8 @@ module.exports = {
         updated_at: new Date()
       }
     ], {})
+
+    await queryInterface.sequelize.query('DBCC CHECKIDENT(\'users\', RESEED, 1001)')
 
     await queryInterface.bulkInsert('users', [
       {
@@ -158,57 +166,63 @@ module.exports = {
     ], {})
 
 
-    await queryInterface.bulkInsert('notifications', [
-      {
-        title: 'Se necesita un trabajador para la construcción',
-        description: 'Se necesita un trabajador para la construcción',
-        amount: 10000,
-        user_id: 1001,
-        created_at: new Date(),
-        updated_at: new Date()
-      },
-      {
-        title: 'construcción',
-        description: 'construcción',
-        amount: 10000,
-        user_id: 1001,
-        created_at: new Date(),
-        updated_at: new Date()
-      },
-      {
-        title: 'Nueva buqueda',
-        description: 'Busqueda de servicio',
-        amount: 10000,
-        user_id: 1001,
-        created_at: new Date(),
-        updated_at: new Date()
-      },
-      {
-        title: 'Se necesita un trabajador para la construcción',
-        description: 'Se necesita un trabajador para la construcción',
-        amount: 10000,
-        user_id: 1001,
-        created_at: new Date(),
-        updated_at: new Date()
-      },
-      {
-        title: 'construcción',
-        description: 'construcción',
-        amount: 10000,
-        user_id: 1002,
-        created_at: new Date(),
-        updated_at: new Date()
-      },
-      {
-        title: 'Nueva buqueda',
-        description: 'Busqueda de servicio',
-        amount: 10000,
-        user_id: 1002,
-        created_at: new Date(),
-        updated_at: new Date()
-      }
+    // await queryInterface.bulkInsert('notifications', [
+    //   {
+    //     id: 1001,
+    //     title: 'Se necesita un trabajador para la construcción',
+    //     description: 'Se necesita un trabajador para la construcción',
+    //     amount: 10000,
+    //     user_id: 1001,
+    //     created_at: new Date(),
+    //     updated_at: new Date()
+    //   },
+    //   {
+    //     id: 1002,
+    //     title: 'construcción',
+    //     description: 'construcción',
+    //     amount: 10000,
+    //     user_id: 1001,
+    //     created_at: new Date(),
+    //     updated_at: new Date()
+    //   },
+    //   {
+    //     id: 1003,
+    //     title: 'Nueva buqueda',
+    //     description: 'Busqueda de servicio',
+    //     amount: 10000,
+    //     user_id: 1001,
+    //     created_at: new Date(),
+    //     updated_at: new Date()
+    //   },
+    //   {
+    //     id: 1004,
+    //     title: 'Se necesita un trabajador para la construcción',
+    //     description: 'Se necesita un trabajador para la construcción',
+    //     amount: 10000,
+    //     user_id: 1001,
+    //     created_at: new Date(),
+    //     updated_at: new Date()
+    //   },
+    //   {
+    //     id: 1005,
+    //     title: 'construcción',
+    //     description: 'construcción',
+    //     amount: 10000,
+    //     user_id: 1002,
+    //     created_at: new Date(),
+    //     updated_at: new Date()
+    //   },
+    //   {
+    //     id: 1006,
+    //     title: 'Nueva buqueda',
+    //     description: 'Busqueda de servicio',
+    //     amount: 10000,
+    //     user_id: 1002,
+    //     created_at: new Date(),
+    //     updated_at: new Date()
+    //   }
 
-    ], {})
+    // ], {})
 
 
 
