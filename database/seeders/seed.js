@@ -8,7 +8,7 @@ module.exports = {
     // await queryInterface.sequelize.query('SET IDENTITY_INSERT countries ON')
 
 
-    // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'countries\', RESEED, 1001)')
+    await queryInterface.sequelize.query('DBCC CHECKIDENT(\'countries\', RESEED, 1001)')
     await queryInterface.bulkInsert('countries', [
       {
         name: 'Chile',
@@ -32,7 +32,7 @@ module.exports = {
     ], {})
 
 
-    // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'states\', RESEED, 1001)')
+    await queryInterface.sequelize.query('DBCC CHECKIDENT(\'states\', RESEED, 1001)')
     await queryInterface.bulkInsert('states', [
       {
         name: 'Maule',
@@ -46,7 +46,7 @@ module.exports = {
       }
     ], {})
 
-    // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'cities\', RESEED, 1001)')
+    await queryInterface.sequelize.query('DBCC CHECKIDENT(\'cities\', RESEED, 1001)')
     await queryInterface.bulkInsert('cities',[
       {
         name: 'Talca',
@@ -62,7 +62,7 @@ module.exports = {
       }
     ], {})
 
-    // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'categories\', RESEED, 1001)')
+    await queryInterface.sequelize.query('DBCC CHECKIDENT(\'categories\', RESEED, 1001)')
     await queryInterface.bulkInsert('categories', [
       {
         name: 'Tecnología',
@@ -77,7 +77,7 @@ module.exports = {
     ], {})
 
 
-    // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'profiles\', RESEED, 1001)')
+    await queryInterface.sequelize.query('DBCC CHECKIDENT(\'profiles\', RESEED, 1001)')
     await queryInterface.bulkInsert('profiles', [
       {
         name: 'Administrador', //1001
@@ -101,7 +101,7 @@ module.exports = {
       }
     ], {})
 
-    // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'users\', RESEED, 1001)')
+    await queryInterface.sequelize.query('DBCC CHECKIDENT(\'users\', RESEED, 1001)')
     await queryInterface.bulkInsert('users', [
       {
         mail: 'admin',
