@@ -63,11 +63,18 @@ async function findAllUsersByProfileCategoryAndCity(profile_id, category_id, cit
     return user
 }
 
+async function updateProfile(id, profile_id){
+    const user = await Users.update({ profile_id: profile_id }, { where: { id: id } }).then(data => { return { 'code': 1, 'data': data } }).catch(err => { return { 'code': 0, 'data': err } }) 
+    return user
+}
+
+
 users.create = create
 users.findAll = findAll
 users.findOneByMail = findOneByMail
 users.findOneById = findOneById
 users.findAllUsersByProfileCategoryAndCity = findAllUsersByProfileCategoryAndCity
+users.updateProfile = updateProfile
 
 
 module.exports = users

@@ -23,4 +23,18 @@ router.post('/offers/findOneBySearchAndUser', async (req, res) => {
     res.json(offer)
 })
 
+
+
+router.post('/offers/acceptOffer', async (req, res) => {
+    const { offer_id } = req.body
+    const offer = await offers.acceptOffer(offer_id)
+    res.json(offer)
+})
+
+router.post('/offers/findOneSelectedBySearch', async (req, res) => {
+    const { search_id } = req.body
+    const offer = await offers.findOneSelectedBySearch(search_id)
+    res.json(offer)
+})
+
 module.exports = router

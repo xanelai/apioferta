@@ -396,8 +396,21 @@ module.exports = {
             }
         )
 
-       
-
+        await queryInterface.createTable('social_networks', {
+            id: {
+                allowNull: false,
+                autoIncrement: true,
+                primaryKey: true,
+                type: Sequelize.INTEGER
+            },
+            name: { type: Sequelize.STRING },
+            url: { type: Sequelize.STRING },
+            created_at: { type: Sequelize.DATE },
+            updated_at: { type: Sequelize.DATE }
+        }, 
+        {
+            initialAutoIncrement: 1001,
+        })
 
     },
     down: async (queryInterface, Sequelize) => {

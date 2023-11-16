@@ -26,8 +26,26 @@ async function findOneBySearchAndUser(search_id, user_id) {
     return offer
 }
 
+async function findOneSelectedBySearch(search_id) {
+    const offer = await Offers.findOne({
+        where: {search_id: search_id, state_code: 1},
+    }).then(data => {return {'code': 1, 'data': data}}).catch(err => {return {'code': 0, 'data': err}})
+    return offer
+}
+
+async function acceptOffer(offer_id) {
+    const offer = await Offers.update({
+        state_code: 1,
+    }, {
+        where: {id: offer_id}
+    }).then(data => {return {'code': 1, 'data': data}}).catch(err => {return {'code': 0, 'data': err}})
+    return offer
+}
+
 offers.create = create
 offers.findAllBySearch = findAllBySearch
 offers.findOneBySearchAndUser = findOneBySearchAndUser
+offers.findOneSelectedBySearch = findOneSelectedBySearch
+offers.acceptOffer = acceptOffer
 
 module.exports = offers

@@ -32,5 +32,10 @@ router.post('/users/findAllUsersByProfileCategoryAndCity', async (req, res) => {
     res.json(user)
 })
 
+router.post('/users/updateProfile', async (req, res) => {
+    const { id, profile_id } = req.body
+    const user = await users.updateProfile(id, profile_id)
+    res.json(user)
+})
 
 module.exports = router
