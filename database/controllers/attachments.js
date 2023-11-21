@@ -4,9 +4,9 @@ const { Attachments, Searches } = require('../db')
 const { BlobServiceClient } = require('@azure/storage-blob')
 
 
-const blobService = BlobServiceClient.fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING)
+//const blobService = BlobServiceClient.fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING)
 
-//const blobService = BlobServiceClient.fromConnectionString('DefaultEndpointsProtocol=https;AccountName=ofertablob;AccountKey=6UYheWSftBexoJSFbXeUQgJiD36ISdmRmg+aH37GqLRbQjE7ILFfjS4OjuxZ4M2veqMP4zvoJStz+AStgPMGpw==;EndpointSuffix=core.windows.net')
+const blobService = BlobServiceClient.fromConnectionString('DefaultEndpointsProtocol=https;AccountName=ofertablob;AccountKey=6UYheWSftBexoJSFbXeUQgJiD36ISdmRmg+aH37GqLRbQjE7ILFfjS4OjuxZ4M2veqMP4zvoJStz+AStgPMGpw==;EndpointSuffix=core.windows.net')
 
 const attachments = {}
 
