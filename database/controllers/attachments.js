@@ -71,9 +71,10 @@ const uploadToAzure = async (req, res) => {
   const blobName = Date.now() + '-' + formatName(originalname)
   const containerName = 'attachments'
   const containerClient = blobService.getContainerClient(containerName)
-  const blockBlobClient = containerClient.getBlockBlobClient(blobName).uploadData(buffer)
-  console.log(blobName)
-  res.json({ 'code': 1, 'data': blobName })
+  const blockBlobClient = await containerClient.getBlockBlobClient(blobName).uploadData(buffer)
+  const file = {name: blobName }
+
+  res.json({ 'code': 1, 'data': file})
 
 }
 

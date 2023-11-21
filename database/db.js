@@ -10,7 +10,7 @@ require('dotenv').config()
 //   }
 
 const db = {};
- db.connection = new Sequelize('beta01','root_user','Oferta%2023$$_', {host: 'oferta.database.windows.net', dialect: "mssql"})
+db.connection = new Sequelize('beta01','root_user','Oferta%2023$$_', {host: 'oferta.database.windows.net', dialect: "mssql"})
 //db.connection = new Sequelize('oferta','root','fenasantma', {host: 'localhost', dialect: "mysql"})
 db.Countries = require('./models/countries')(db.connection, DataTypes)
 db.States = require('./models/states')(db.connection, DataTypes)
