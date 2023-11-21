@@ -3,13 +3,18 @@ const router = express.Router()
 const attachments = require('../database/controllers/attachments')
 
 
-router.post('/attachments/upload', attachments.upload.single('file'), async (req, res) => {
-    const file = req.file
-    if (!file) {
-        return res.status(400).send('No files were uploaded.');
-    }
-    res.json({ 'code': 1, 'data': file })
-})
+
+
+
+// router.post('/attachments/upload', attachments.upload.single('file'), attachments.uploadToAzure, async (req, res) => {
+//     const file = req.file
+//     if (!file) {
+//         return res.status(400).send('No files were uploaded.');
+//     }
+//     res.json({ 'code': 1, 'data': file })
+// })
+
+router.post('/attachments/upload', attachments.upload.single('file'), attachments.uploadToAzure)
 
 router.post('/attachments/create', async (req, res) => {
     const { url, search_id, offer_id, bidder_application_id } = req.body

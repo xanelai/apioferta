@@ -1,28 +1,34 @@
 const multer = require('multer')
 const path = require('path')
-const {Attachments, Searches} = require('../db')
+const { Attachments, Searches } = require('../db')
+const { BlobServiceClient } = require('@azure/storage-blob')
+
+
+const blobService = BlobServiceClient.fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING)
+
+//const blobService = BlobServiceClient.fromConnectionString('DefaultEndpointsProtocol=https;AccountName=ofertablob;AccountKey=6UYheWSftBexoJSFbXeUQgJiD36ISdmRmg+aH37GqLRbQjE7ILFfjS4OjuxZ4M2veqMP4zvoJStz+AStgPMGpw==;EndpointSuffix=core.windows.net')
 
 const attachments = {}
 
 async function create(url, search_id, offer_id, bidder_application_id) {
-  const attachment = await Attachments.create({url: url, search_id: search_id, offer_id: offer_id, bidder_application_id: bidder_application_id}).then(data => {return {'code': 1, 'data': data}}).catch(err => {return {'code': 0, 'data': err}})
+  const attachment = await Attachments.create({ url: url, search_id: search_id, offer_id: offer_id, bidder_application_id: bidder_application_id }).then(data => { return { 'code': 1, 'data': data } }).catch(err => { return { 'code': 0, 'data': err } })
   return attachment
 
 }
 
 async function findAllBySearch(search_id) {
   const attachment = await Attachments.findAll({
-    where: {search_id: search_id},
-    include: [{model: Searches}]
-  }).then(data => {return {'code': 1, 'data': data}}).catch(err => {return {'code': 0, 'data': err}})
+    where: { search_id: search_id },
+    include: [{ model: Searches }]
+  }).then(data => { return { 'code': 1, 'data': data } }).catch(err => { return { 'code': 0, 'data': err } })
   return attachment
 }
 
 async function findOneBySearch(search_id) {
   const attachment = await Attachments.findOne({
-    where: {search_id: search_id},
-    include: [{model: Searches}]
-  }).then(data => {return {'code': 1, 'data': data}}).catch(err => {return {'code': 0, 'data': err}})
+    where: { search_id: search_id },
+    include: [{ model: Searches }]
+  }).then(data => { return { 'code': 1, 'data': data } }).catch(err => { return { 'code': 0, 'data': err } })
   return attachment
 }
 
@@ -36,29 +42,49 @@ const formatName = (originalname) => {
 
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, '../../public/attachments'));
-  },
+  // destination: function (req, file, cb) {
+  //   cb(null, path.join(__dirname, '../../public/attachments'));
+  // },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + formatName(file.originalname));
+  },
+  buffer: function (req, file, cb) {
+    cb(null, file.buffer);
   }
+
 })
 
-async function findOneByOffer(offer_id){
+async function findOneByOffer(offer_id) {
   const attachment = await Attachments.findOne({
-    where: {offer_id: offer_id},
-    include: [{model: Searches}]
-  }).then(data => {return {'code': 1, 'data': data}}).catch(err => {return {'code': 0, 'data': err}})
+    where: { offer_id: offer_id },
+    include: [{ model: Searches }]
+  }).then(data => { return { 'code': 1, 'data': data } }).catch(err => { return { 'code': 0, 'data': err } })
   return attachment
 }
 
-const upload = multer({ storage: storage })
+// const upload = multer({ storage: storage })
+const upload = multer()
+
+
+const uploadToAzure = async (req, res) => {
+  const { originalname, buffer } = req.file
+  const blobName = Date.now() + '-' + formatName(originalname)
+  const containerName = 'attachments'
+  const containerClient = blobService.getContainerClient(containerName)
+  const blockBlobClient = containerClient.getBlockBlobClient(blobName).uploadData(buffer)
+  console.log(blobName)
+  res.json({ 'code': 1, 'data': blobName })
+
+}
+
+
 
 attachments.upload = upload
 attachments.create = create
 attachments.findAllBySearch = findAllBySearch
 attachments.findOneBySearch = findOneBySearch
 attachments.findOneByOffer = findOneByOffer
+attachments.uploadToAzure = uploadToAzure
 
 
 module.exports = attachments
