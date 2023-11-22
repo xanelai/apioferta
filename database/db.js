@@ -4,7 +4,7 @@ const db = {}
 
 db.connection = new Sequelize(
     process.env.DATABASE,
-    process.env.USERNAME,
+    process.env.USER_NAME,
     process.env.PASSWORD,
     {
         host: process.env.HOST,
