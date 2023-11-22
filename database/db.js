@@ -1,17 +1,17 @@
-const {Sequelize, DataTypes} = require('sequelize')
 require('dotenv').config()
+const { Sequelize, DataTypes } = require('sequelize')
+const db = {}
 
-// module.exports = {
-//     username :  "root_user",
-//     password : "Oferta%2023$$_",
-//     database : "beta01",
-//     host : "oferta.database.windows.net",
-//     dialect :  "mssql",
-//   }
+db.connection = new Sequelize(
+    process.env.DATABASE,
+    process.env.USERNAME,
+    process.env.PASSWORD,
+    {
+        host: process.env.HOST,
+        dialect: process.env.DIALECT,
+    }
+)
 
-const db = {};
-db.connection = new Sequelize('beta01','root_user','Oferta%2023$$_', {host: 'oferta.database.windows.net', dialect: "mssql"})
-//db.connection = new Sequelize('oferta','root','fenasantma', {host: 'localhost', dialect: "mysql"})
 db.Countries = require('./models/countries')(db.connection, DataTypes)
 db.States = require('./models/states')(db.connection, DataTypes)
 db.Cities = require('./models/cities')(db.connection, DataTypes)
