@@ -4,5 +4,6 @@
 /out
 /.next
 /test_config_files
+env.txt
 
 
