@@ -7,3 +7,9 @@ USERNAME=root_user
 HOST=oferta.database.windows.net
 
 
+PORT=3003
+DATABASE=oferta
+DIALECT=mysql
+PASSWORD=fenasantma
+USERNAME=root
+HOST=localhost
