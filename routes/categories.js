@@ -14,4 +14,19 @@ router.get('/categories/findAll', async (req, res) => {
     res.json(category)
 })
 
+
+
+router.post('/categories/update', async (req, res) => {
+    const { id, name, description } = req.body
+    const category = await categories.update(id, name, description)
+    res.json(category)
+})
+
+router.post('/categories/findOneByName', async (req, res) => {
+    const { name } = req.body
+    const category = await categories.findOneByName(name)
+    res.json(category)
+})
+
+
 module.exports = router

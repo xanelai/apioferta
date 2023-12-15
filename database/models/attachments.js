@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         url: DataTypes.STRING,
         search_id: DataTypes.INTEGER,
         offer_id: DataTypes.INTEGER,
-        bidder_application_id: DataTypes.INTEGER,
+        user_id: DataTypes.INTEGER,
     }, {
         sequelize,
         modelName: 'Attachments',

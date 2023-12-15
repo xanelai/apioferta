@@ -4,7 +4,7 @@ const sequelize = require("sequelize");
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'countries\', RESEED, 1001)')
         await queryInterface.createTable('countries',
             {
                 id: {
@@ -22,7 +22,7 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'states\', RESEED, 1001)')
         await queryInterface.createTable('states',
             {
                 id: {
@@ -49,7 +49,7 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'cities\', RESEED, 1001)')
         await queryInterface.createTable('cities',
             {
                 id: {
@@ -76,7 +76,7 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'categories\', RESEED, 1001)')
         await queryInterface.createTable('categories',
             {
                 id: {
@@ -94,7 +94,7 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'profiles\', RESEED, 1001)')
         await queryInterface.createTable('profiles',
             {
                 id: {
@@ -111,7 +111,7 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'users\', RESEED, 1001)')
         await queryInterface.createTable('users', {
             id: {
                 allowNull: false,
@@ -161,7 +161,7 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'notifications\', RESEED, 1001)')
         await queryInterface.createTable('notifications', {
             id: {
                 allowNull: false,
@@ -189,7 +189,7 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'searches\', RESEED, 1001)')
         await queryInterface.createTable('searches', {
             id: {
                 allowNull: false,
@@ -230,7 +230,7 @@ module.exports = {
             description: { type: Sequelize.STRING },
             latency_code: { type: Sequelize.INTEGER },
             state_code: { type: Sequelize.INTEGER },
-            close_date: { type: Sequelize.DATE },   
+            close_date: { type: Sequelize.DATE },
             created_at: { type: Sequelize.DATE },
             updated_at: { type: Sequelize.DATE }
         },
@@ -238,7 +238,7 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'offers\', RESEED, 1001)')
         await queryInterface.createTable('offers', {
             id: {
                 allowNull: false,
@@ -276,7 +276,7 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'bidder_applications\', RESEED, 1001)')
         await queryInterface.createTable('bidder_applications', {
             id: {
                 allowNull: false,
@@ -284,16 +284,9 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            offer_id: {
-                allowNull: true,
-                unique: false,
-                type: Sequelize.INTEGER,
-                onDelete: 'SET NULL',
-                references: {
-                    model: 'offers',
-                    key: 'id'
-                }
-            },
+            plan: { type: Sequelize.STRING },
+            expiration_date: { type: Sequelize.DATE },
+            status: { type: Sequelize.BOOLEAN },
             user_id: {
                 allowNull: true,
                 unique: false,
@@ -304,8 +297,6 @@ module.exports = {
                     key: 'id'
                 }
             },
-            rut: { type: Sequelize.STRING },
-            state: { type: Sequelize.BOOLEAN },
             created_at: { type: Sequelize.DATE },
             updated_at: { type: Sequelize.DATE }
         },
@@ -313,7 +304,7 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'attachments\', RESEED, 1001)')
         await queryInterface.createTable('attachments', {
             id: {
                 allowNull: false,
@@ -342,13 +333,13 @@ module.exports = {
                     key: 'id'
                 }
             },
-            bidder_application_id: {
+            user_id: {
                 allowNull: true,
                 unique: false,
                 type: Sequelize.INTEGER,
                 onDelete: 'SET NULL',
                 references: {
-                    model: 'bidder_applications',
+                    model: 'users',
                     key: 'id'
                 }
             },
@@ -359,24 +350,9 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-
+        
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'applications\', RESEED, 1001)')
         await queryInterface.createTable('applications', {
-            id: {
-                allowNull: false,
-                autoIncrement: true,
-                primaryKey: true,
-                type: Sequelize.INTEGER
-            },
-            search_id: {
-                allowNull: true,
-                unique: false,
-                type: Sequelize.INTEGER,
-                onDelete: 'SET NULL',
-                references: {
-                    model: 'searches',
-                    key: 'id'
-                }
-            },
             user_id: {
                 allowNull: true,
                 unique: false,
@@ -396,26 +372,9 @@ module.exports = {
             }
         )
 
-        await queryInterface.createTable('social_networks', {
-            id: {
-                allowNull: false,
-                autoIncrement: true,
-                primaryKey: true,
-                type: Sequelize.INTEGER
-            },
-            name: { type: Sequelize.STRING },
-            url: { type: Sequelize.STRING },
-            created_at: { type: Sequelize.DATE },
-            updated_at: { type: Sequelize.DATE }
-        }, 
-        {
-            initialAutoIncrement: 1001,
-        })
 
     },
     down: async (queryInterface, Sequelize) => {
         await queryInterface.dropAllTables()
     }
 };
-
-

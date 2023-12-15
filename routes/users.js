@@ -38,4 +38,20 @@ router.post('/users/updateProfile', async (req, res) => {
     res.json(user)
 })
 
+
+router.post('/users/updatePhone', async (req, res) => {
+    const { id, phone } = req.body
+    const user = await users.updatePhone(id, phone)
+    res.json(user)
+})
+
+
+router.post('/users/updateAccount', async (req, res) => {
+    const { id, city_id, category_id, dni } = req.body
+    const user = await users.updateAccount(id, city_id, category_id, dni)
+    res.json(user)
+})
+
+
+
 module.exports = router

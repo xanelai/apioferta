@@ -25,6 +25,7 @@ app.use(require('./routes/searches'))
 app.use(require('./routes/attachments'))
 app.use(require('./routes/applications'))
 app.use(require('./routes/offers'))
+app.use(require('./routes/bidder_applications'))
 
 
 app.listen(port, () => {

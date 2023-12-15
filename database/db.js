@@ -4,7 +4,7 @@ const db = {}
 
 db.connection = new Sequelize(
     process.env.DATABASE,
-    process.env.USER_NAME,
+    process.env.USERNAME,
     process.env.PASSWORD,
     {
         host: process.env.HOST,
@@ -24,7 +24,7 @@ db.Searches = require('./models/searches')(db.connection, DataTypes)
 db.Offers = require('./models/offers')(db.connection, DataTypes)
 db.Attachments = require('./models/attachments')(db.connection, DataTypes)
 
-// db.BidderApplications = require('./models/bidderApplications')(db.connection, DataTypes)
+db.BidderApplications = require('./models/bidder_applications')(db.connection, DataTypes)
 
 db.Applications = require('./models/applications')(db.connection, DataTypes)
 

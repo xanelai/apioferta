@@ -7,8 +7,8 @@ const blobService = BlobServiceClient.fromConnectionString(process.env.AZURE_STO
 
 const attachments = {}
 
-async function create(url, search_id, offer_id, bidder_application_id) {
-  const attachment = await Attachments.create({ url: url, search_id: search_id, offer_id: offer_id, bidder_application_id: bidder_application_id }).then(data => { return { 'code': 1, 'data': data } }).catch(err => { return { 'code': 0, 'data': err } })
+async function create(url, search_id, offer_id, user_id) {
+  const attachment = await Attachments.create({ url: url, search_id: search_id, offer_id: offer_id, user_id }).then(data => { return { 'code': 1, 'data': data } }).catch(err => { return { 'code': 0, 'data': err } })
   return attachment
 
 }
@@ -75,6 +75,15 @@ const uploadToAzure = async (req, res) => {
 
 }
 
+async function findOneByUser(user_id) {
+  const attachment = await Attachments.findOne({
+    where: { user_id: user_id },
+    order: [['createdAt', 'DESC']],
+    
+  }).then(data => { return { 'code': 1, 'data': data } }).catch(err => { return { 'code': 0, 'data': err } })
+  return attachment
+}
+
 
 
 attachments.upload = upload
@@ -83,6 +92,7 @@ attachments.findAllBySearch = findAllBySearch
 attachments.findOneBySearch = findOneBySearch
 attachments.findOneByOffer = findOneByOffer
 attachments.uploadToAzure = uploadToAzure
+attachments.findOneByUser = findOneByUser
 
 
 module.exports = attachments

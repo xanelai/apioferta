@@ -68,6 +68,16 @@ async function updateProfile(id, profile_id){
     return user
 }
 
+async function updatePhone(id, phone){
+    const user = await Users.update({ phone: phone }, { where: { id: id } }).then(data => { return { 'code': 1, 'data': data } }).catch(err => { return { 'code': 0, 'data': err } }) 
+    return user
+}
+
+async function updateAccount(id,  city_id, category_id, dni ){
+    const user = await Users.update({ city_id: city_id, category_id: category_id, dni: dni }, { where: { id: id } }).then(data => { return { 'code': 1, 'data': data } }).catch(err => { return { 'code': 0, 'data': err } })
+    return user
+}
+
 
 users.create = create
 users.findAll = findAll
@@ -75,6 +85,8 @@ users.findOneByMail = findOneByMail
 users.findOneById = findOneById
 users.findAllUsersByProfileCategoryAndCity = findAllUsersByProfileCategoryAndCity
 users.updateProfile = updateProfile
+users.updatePhone = updatePhone
+users.updateAccount = updateAccount
 
 
 module.exports = users
