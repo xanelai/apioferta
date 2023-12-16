@@ -23,9 +23,6 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-        
-
-       
         await queryInterface.createTable('states',
             {
                 id: {
@@ -52,9 +49,6 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-       
-
-        
         await queryInterface.createTable('cities',
             {
                 id: {
@@ -81,9 +75,6 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-       
-
-       
         await queryInterface.createTable('categories',
             {
                 id: {
@@ -101,9 +92,6 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-       
-
-       
         await queryInterface.createTable('profiles',
             {
                 id: {
@@ -120,9 +108,6 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-      
-
-    
         await queryInterface.createTable('users', {
             id: {
                 allowNull: false,
@@ -172,7 +157,6 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-      
         await queryInterface.createTable('notifications', {
             id: {
                 allowNull: false,
@@ -200,7 +184,6 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-    
         await queryInterface.createTable('searches', {
             id: {
                 allowNull: false,
@@ -249,7 +232,6 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-       
         await queryInterface.createTable('offers', {
             id: {
                 allowNull: false,
@@ -287,7 +269,6 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-      
         await queryInterface.createTable('bidder_applications', {
             id: {
                 allowNull: false,
@@ -315,7 +296,6 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-     
         await queryInterface.createTable('attachments', {
             id: {
                 allowNull: false,
@@ -361,7 +341,6 @@ module.exports = {
                 initialAutoIncrement: 1001,
             }
         )
-     
         await queryInterface.createTable('applications', {
             id: {
                 allowNull: false,
@@ -379,6 +358,16 @@ module.exports = {
                     key: 'id'
                 }
             },
+            search_id: {
+                allowNull: true,
+                unique: false,
+                type: Sequelize.INTEGER,
+                onDelete: 'SET NULL',
+                references: {
+                    model: 'searches',
+                    key: 'id'
+                }
+            },
             state_code: { type: Sequelize.INTEGER },
             created_at: { type: Sequelize.DATE },
             updated_at: { type: Sequelize.DATE }
@@ -388,18 +377,18 @@ module.exports = {
             }
         )
 
-        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'countries\', RESEED, 1001)')
-        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'states\', RESEED, 1001)')
-        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'cities\', RESEED, 1001)')
-        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'categories\', RESEED, 1001)')
-        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'profiles\', RESEED, 1001)')
-        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'users\', RESEED, 1001)')
-        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'notifications\', RESEED, 1001)')
-        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'searches\', RESEED, 1001)')
-        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'offers\', RESEED, 1001)')
-        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'bidder_applications\', RESEED, 1001)')
-        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'attachments\', RESEED, 1001)')
-        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'applications\', RESEED, 1001)')
+        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'countries\', RESEED, 1001)')
+        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'states\', RESEED, 1001)')
+        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'cities\', RESEED, 1001)')
+        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'categories\', RESEED, 1001)')
+        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'profiles\', RESEED, 1001)')
+        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'users\', RESEED, 1001)')
+        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'notifications\', RESEED, 1001)')
+        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'searches\', RESEED, 1001)')
+        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'offers\', RESEED, 1001)')
+        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'bidder_applications\', RESEED, 1001)')
+        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'attachments\', RESEED, 1001)')
+        // // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'applications\', RESEED, 1001)')
 
 
     },
