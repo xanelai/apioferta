@@ -3,8 +3,8 @@ const applications = {}
 
 async function create(search_id, user_id, state_code) {
     const application = await Applications.create({
-        search_id: search_id,
         user_id: user_id,
+        search_id: search_id,
         state_code: state_code,
     }).then(data => { return { 'code': 1, 'data': data } }).catch(err => { return { 'code': 0, 'data': err } })
     return application

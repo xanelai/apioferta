@@ -377,18 +377,18 @@ module.exports = {
             }
         )
 
-        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'countries\', RESEED, 1001)')
-        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'states\', RESEED, 1001)')
-        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'cities\', RESEED, 1001)')
-        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'categories\', RESEED, 1001)')
-        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'profiles\', RESEED, 1001)')
-        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'users\', RESEED, 1001)')
-        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'notifications\', RESEED, 1001)')
-        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'searches\', RESEED, 1001)')
-        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'offers\', RESEED, 1001)')
-        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'bidder_applications\', RESEED, 1001)')
-        // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'attachments\', RESEED, 1001)')
-        // // await queryInterface.sequelize.query('DBCC CHECKIDENT(\'applications\', RESEED, 1001)')
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'countries\', RESEED, 1001)')
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'states\', RESEED, 1001)')
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'cities\', RESEED, 1001)')
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'categories\', RESEED, 1001)')
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'profiles\', RESEED, 1001)')
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'users\', RESEED, 1001)')
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'notifications\', RESEED, 1001)')
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'searches\', RESEED, 1001)')
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'offers\', RESEED, 1001)')
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'bidder_applications\', RESEED, 1001)')
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'attachments\', RESEED, 1001)')
+        await queryInterface.sequelize.query('DBCC CHECKIDENT(\'applications\', RESEED, 1001)')
 
 
     },

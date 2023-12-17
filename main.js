@@ -29,5 +29,5 @@ app.use(require('./routes/bidder_applications'))
 
 
 app.listen(port, () => {
-    console.log('server work! at port: ' + port)
+    console.log('TEST OK')
 })

@@ -7,6 +7,14 @@ USERNAME=root_user
 HOST=oferta.database.windows.net
 
 
+NUEVO XANEL
+DATABASE= xaneldb
+DIALECT=mssql
+PASSWORD=parral_2023%
+USERNAME=root_user
+HOST=xanelsqlserver.database.windows.net
+
+
 PORT=3003
 DATABASE=oferta
 DIALECT=mysql
